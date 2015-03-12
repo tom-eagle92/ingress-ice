@@ -21,4 +21,4 @@ do
     fi
 done
 
-exec ./phantomjs ice.js $ARGS
+phantomjs ice.js $ARGS

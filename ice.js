@@ -190,6 +190,7 @@ window.setTimeout(function () {page.open('https://www.ingress.com/intel', functi
                document.querySelector('#geotools').style.display = 'none';
                document.querySelector('#header').style.display = 'none';
                document.querySelector('#snapcontrol').style.display = 'none';
+               document.querySelector('#filters_container').style.display = 'none';
                document.querySelectorAll('.img_snap')[0].style.display = 'none';
               });
               
