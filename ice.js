@@ -502,6 +502,37 @@ function humanPresence() {
     }
 }
 
+
+/**
+ * Wait for data
+ */
+var loadingDoneCounter = 0;
+var waitingInterval;
+
+function waitForData() {
+    var isLoadingDone = page.evaluate(function() {
+        return document.querySelector('#loading_msg').style.display == 'none';
+    });
+
+    if (isLoadingDone) {
+        loadingDoneCounter++;
+        console.log(loadingDoneCounter);
+    } else {
+        loadingDoneCounter = 0;
+    }
+
+    if (loadingDoneCounter >= 3) {
+        
+        window.setTimeout(function () {
+            timestampz(timestamp, getDateTime(), iitc);
+            s();
+        }, 1000);
+        window.clearInterval(waitingInterval);
+    } else {
+        console.log('waiting for data...');
+    }
+}
+
 /**
  * Main function. Wrapper for others.
  */
@@ -523,11 +554,9 @@ function main() {
             idleReset();
         });
     }
-    window.setTimeout(function () {
-        timestampz(timestamp, getDateTime(), iitc);
-        s();
-    }, 2000);
+    waitingInterval = window.setInterval(waitForData, 1000);
 }
+
 //MAIN SCRIPT
 
 checkSettings(l, p, minlevel, maxlevel, area);
